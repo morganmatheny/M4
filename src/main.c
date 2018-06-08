@@ -33,7 +33,7 @@ int main(int argc,char **argv)
     if(user.gravswitch==1)
         PetscPrintf(PETSC_COMM_WORLD,"\nGravity is ON\n");
     else
-        PetscPrintf(PETSC_COMM_WORLD,"\Gravity is OFF\n");
+        PetscPrintf(PETSC_COMM_WORLD,"\nGravity is OFF\n");
     if(user.chemswitch==1)
         PetscPrintf(PETSC_COMM_WORLD,"\nChemistry is ON\n");
     else
