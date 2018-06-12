@@ -39,6 +39,9 @@ int main(int argc,char **argv)
 	free(user.y);
 	free(user.z);
 	
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     Finalize & exit.
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	ierr = PetscFinalize();
 	PetscFunctionReturn(0);
 }
