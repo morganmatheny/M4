@@ -1,7 +1,7 @@
 /*
  * MyChemistry.c
  * Created by Jeremy A Riousset & Carol S Paty on 10/31/13
- *
+ * Updated by Morgan Matheny on 06/12/2018
  * Define chemical reactions in the Martian ionosphere
  *
  */

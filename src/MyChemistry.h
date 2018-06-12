@@ -1,7 +1,7 @@
 /*
  * MyChemistry.h
  * Created by Jeremy A Riousset on 10/30/13
- *
+ * Updated by Morgan Matheny on 06/12/2018
  * Define reaction rates in the Martian atmosphere.
  *
  */
