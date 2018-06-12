@@ -160,7 +160,7 @@ PetscErrorCode InitCtx(AppCtx *user, MonitorCtx *usrmnt)
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
 	
 	ierr = PetscTime(&user->t0);CHKERRQ(ierr);
-	user->ldName = sprintf(user->dName,"ouput/");
+	user->ldName = sprintf(user->dName,"output/");
 	ierr = PetscOptionsGetString(PETSC_NULL,PETSC_NULL,"-output_folder",user->dName,PETSC_MAX_PATH_LEN-1,PETSC_NULL);CHKERRQ(ierr);
 	user->ldName = sprintf(user->vName,"viz_dir/");
 	ierr = PetscOptionsGetString(PETSC_NULL,PETSC_NULL,"-visualization_folder",user->vName,PETSC_MAX_PATH_LEN-1,PETSC_NULL);CHKERRQ(ierr);
@@ -1073,8 +1073,8 @@ PetscReal MinAbs(PetscReal a,PetscReal b)
 /* Calculate the square of the norm 2 of P                             */
 /* ------------------------------------------------------------------- */
 #undef __FUNCT__
-#define __FUNCT__ "Norm2"
-PetscReal Norm2(PetscReal M[3])
+#define __FUNCT__ "myNorm2"
+PetscReal myNorm2(PetscReal M[3])
 {
 	return (M[0]*M[0]+M[1]*M[1]+M[2]*M[2]);
 }

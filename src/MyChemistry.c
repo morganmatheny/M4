@@ -55,7 +55,6 @@ PetscReal v2(PetscReal N , PetscReal Te) {
         Negative values are coming from the Interpolate function. The function is returning negative numbers because E is very low due to Te, Xsec is then interpolated to a negative number
      */
 	Xsec = Interpolate1(E,Ei,XsecCO2i,Ni,lin_lin)*1e-20; //_m2,
-	if(Xsec<0) Xsec = 0;
 	v = PetscSqrtScalar(2*kB*Te/me); //_m/_s
 	K = Xsec*v; //_m3/_s
     V = N*K;

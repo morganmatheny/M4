@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -S /bin/bash
+#PBS -q longq
+#PBS -l nodes=4:ppn=36
+# PBS -l walltime=3000:00:00
+#PBS -N M4
+#PBS -d /scratch/mathenym/NoChemM4
+
+### cd to directory where the job was submitted:
+cd "${PBS_O_WORKDIR}"
+
+### load the required environment modules:
+module load gcc/6.1.0                  
+module load mpich/ge/gcc/64/3.2        
+module load gcc/6.3.0                  
+module load petsc/mpich2/3.8.3
+
+mpirun -np 64 ./M4 -options_file ../input/main.in
+# mpirun -np 64 main -options_file input/main.in # > viz_dir/log.out

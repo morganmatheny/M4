@@ -57,5 +57,8 @@ clean_data:
 	@echo " Cleaning...";
 	$(RM) -r ../$(BUILDDIR)/* M4 ../output/* ../viz_dir/*
 
+convert: 
+	./conv -options_file ../input/main.in 
+
 run:
-	mpirun -np 4 ./M4 -options_file ../input/main.in
+	${PETSC_DIR}/${PETSC_ARCH}/bin/mpirun -np 4 ./M4 -options_file ../input/main.in

@@ -44,6 +44,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+//#include "/cm/shared/apps/mpich/ge/gcc/64/3.2/include/mpi.h"
+#include <mpi.h>
 #include "petscsys.h"
 #include <assert.h>
 #include "MyCtx.h"

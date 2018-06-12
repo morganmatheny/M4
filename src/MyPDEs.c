@@ -1594,11 +1594,11 @@ PetscErrorCode FormFunction(TS ts,PetscReal ftime,Vec U,Vec F,void *ctx)
 		// Form F(u,v) = Udot //
 	ierr = DMDAVecGetArrayDOF(da,F,&f);CHKERRQ(ierr);
 
-    if(step==0 || ceilf((step+1)/user->viz_dstep) == (float)(step+1)/user->viz_dstep)
-        if(rank==0){
-            sprintf(fName,"%s/Rates%d.dat",user->vName,step+1);
-            fp = fopen(fName,"w");
-        }
+//    if(step==0 || ceilf((step+1)/user->viz_dstep) == (float)(step+1)/user->viz_dstep)
+//        if(rank==0){
+//            sprintf(fName,"%s/Rates%d.dat",user->vName,step+1);
+//            fp = fopen(fName,"w");
+//        }
 
 		// Compute function over the locally owned part of the grid //
 
@@ -1837,26 +1837,26 @@ PetscErrorCode FormFunction(TS ts,PetscReal ftime,Vec U,Vec F,void *ctx)
                 }
                 ene_chem_S[O2p]     = tau   *(chem_nuS[O2p][0]      *(mi[O2p]/mn[O])    *(gama[O2p]-1)/(gaman[O]-1)     *pn[O]
                                             + chem_nuS[O2p][1]      *(mi[O2p]/mn[CO2])  *(gama[O2p]-1)/(gaman[CO2]-1)   *pn[CO2]
-                                              + (gama[O2p]-1)   *chem_nuS[O2p][0]    *(mi[O2p]*nn[O])/me    *Norm2(vdiffCO2p)/2
-                                              + (gama[O2p]-1)   *chem_nuS[O2p][1]    *(mi[O2p]*nn[CO2])/me  *Norm2(vdiffCO2p)/2);
+                                              + (gama[O2p]-1)   *chem_nuS[O2p][0]    *(mi[O2p]*nn[O])/me    *myNorm2(vdiffCO2p)/2
+                                              + (gama[O2p]-1)   *chem_nuS[O2p][1]    *(mi[O2p]*nn[CO2])/me  *myNorm2(vdiffCO2p)/2);
                 ene_chem_S[CO2p]    = tau   *(chem_nuS[CO2p][0]     *(mi[CO2p]/mn[CO2]) *(gama[CO2p]-1)/(gaman[O]-1)    *pn[CO2]
                                             + chem_nuS[CO2p][1]     *(mi[CO2p]/mn[CO2]) *(gama[CO2p]-1)/(gaman[CO2]-1)  *pn[CO2]
-                                              + (gama[CO2p]-1)  *chem_nuS[CO2p][0]   *(mi[CO2p]*nn[CO2])/me *Norm2(vdiffCO2p)/2
-                                              + (gama[CO2p]-1)  *chem_nuS[CO2p][1]   *(mi[CO2p]*nn[CO2])/me *Norm2(vdiffCO2p)/2);
+                                              + (gama[CO2p]-1)  *chem_nuS[CO2p][0]   *(mi[CO2p]*nn[CO2])/me *myNorm2(vdiffCO2p)/2
+                                              + (gama[CO2p]-1)  *chem_nuS[CO2p][1]   *(mi[CO2p]*nn[CO2])/me *myNorm2(vdiffCO2p)/2);
                 ene_chem_S[Op]      = tau   *(chem_nuS[Op][0]       *(mi[Op]/mn[O])     *(gama[Op]-1)/(gaman[O]-1)      *pn[O]
                                             + chem_nuS[Op][1]       *(mi[Op]/mn[O])     *(gama[Op]-1)/(gaman[O]-1)    *pn[O]
                                             + chem_nuS[Op][2]       *(mi[Op]/mn[O])     *(gama[Op]-1)/(gaman[O]-1)    *pn[O]
-                                              + (gama[Op]-1)    *chem_nuS[Op][0]     *(mi[Op]*nn[O])/me     *Norm2(vdiffOp)/2
-                                              + (gama[Op]-1)    *chem_nuS[Op][1]     *(mi[Op]*nn[O])/me     *Norm2(vdiffOp)/2
-                                              + (gama[Op]-1)    *chem_nuS[Op][2]     *(mi[Op]*nn[O])/me     *Norm2(vdiffOp)/2);
+                                              + (gama[Op]-1)    *chem_nuS[Op][0]     *(mi[Op]*nn[O])/me     *myNorm2(vdiffOp)/2
+                                              + (gama[Op]-1)    *chem_nuS[Op][1]     *(mi[Op]*nn[O])/me     *myNorm2(vdiffOp)/2
+                                              + (gama[Op]-1)    *chem_nuS[Op][2]     *(mi[Op]*nn[O])/me     *myNorm2(vdiffOp)/2);
                 ene_chem_S[e]       = tau   *(chem_nuS[e][0]       *(mi[Op]/mn[CO2])   *(gama[e]-1)/(gaman[CO2]-1)    *pn[O]
                                             + chem_nuS[e][1]       *(mi[Op]/mn[CO2])   *(gama[e]-1)/(gaman[CO2]-1)    *pn[O]
                                             + chem_nuS[e][2]       *(mi[Op]/mn[O])     *(gama[e]-1)/(gaman[O]-1)      *pn[O]
                                             + chem_nuS[e][3]       *(mi[Op]/mn[O])     *(gama[e]-1)/(gaman[O]-1)      *pn[O]
-                                              + (gama[e]-1)    *chem_nuS[e][0]     *(me*nn[CO2])/me         *Norm2(vdiffe)/2
-                                              + (gama[e]-1)    *chem_nuS[e][1]     *(me*nn[CO2])/me         *Norm2(vdiffe)/2
-                                              + (gama[e]-1)    *chem_nuS[e][2]     *(me*nn[O])/me           *Norm2(vdiffe)/2
-                                              + (gama[e]-1)    *chem_nuS[e][3]     *(me*nn[O])/me           *Norm2(vdiffe)/2);
+                                              + (gama[e]-1)    *chem_nuS[e][0]     *(me*nn[CO2])/me         *myNorm2(vdiffe)/2
+                                              + (gama[e]-1)    *chem_nuS[e][1]     *(me*nn[CO2])/me         *myNorm2(vdiffe)/2
+                                              + (gama[e]-1)    *chem_nuS[e][2]     *(me*nn[O])/me           *myNorm2(vdiffe)/2
+                                              + (gama[e]-1)    *chem_nuS[e][3]     *(me*nn[O])/me           *myNorm2(vdiffe)/2);
                 ene_chem_L[O2p]     = tau   *(chem_nuL[O2p][0] *pi[Op]);
                 ene_chem_L[CO2p]    = tau   *(chem_nuL[CO2p][0]*pi[CO2p] + chem_nuL[CO2p][1]*pi[CO2p]  + chem_nuL[CO2p][2]*pi[CO2p]);
                 ene_chem_L[Op]      = tau   *(chem_nuL[Op][0]  *pi[Op]   + chem_nuL[Op][1]  *pi[Op]);
@@ -1906,7 +1906,7 @@ PetscErrorCode FormFunction(TS ts,PetscReal ftime,Vec U,Vec F,void *ctx)
 					vs[l]       = PetscSqrtScalar( (gama[e]*pe + gama[l]*pi[l]) / (ni[l]*mi[l]/me) );   // Sonic speed
 					vs_max[l]   = MaxAbs( vs_max[l], vs[l] );                                           // Maximum Sonic speed
 					
-					vA[l]       = PetscSqrtScalar( Norm2(B) / (ni[l]*mi[l]/me) );                       // Alfven speed
+					vA[l]       = PetscSqrtScalar( myNorm2(B) / (ni[l]*mi[l]/me) );                       // Alfven speed
 					vA_max[l]   = MaxAbs( vA_max[l], vA[l] );                                           // Maximum Alfven speed
 					
 					vf[l]       = c*PetscSqrtScalar( (vs[l]*vs[l]+vA[l]*vA[l]) / (c*c+vA[l]*vA[l]) );   // Fast magnetosonic wave speed
